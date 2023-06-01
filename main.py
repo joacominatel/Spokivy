@@ -34,7 +34,7 @@ class SpokivyApp(App):
         # Botón de configuración
         dropdown = DropDown()
         btn_config = Button(text='Configuración', size_hint=(0.3, 1))
-        btn_config.background_color = (0, 0.5, 0, 1)  # Color de fondo verde oscuro
+        btn_config.background_color = (0, 0.5, 0, 1) 
         btn_config.bind(on_release=lambda btn: dropdown.open(btn))
         search_layout.add_widget(btn_config)
         layout.add_widget(search_layout)
@@ -72,13 +72,11 @@ class SpokivyApp(App):
     
     def process_config_option(self, option):
         if option == 'Logout':
-            # Aquí puedes agregar la lógica para borrar la cuenta del archivo de caché
             print('Logout')
+            # No programado
 
     def print_top_songs(self, label):
         top_tracks = sp.current_user_top_tracks(limit=10, time_range='short_term')
-
-        # Reiniciar el contenido del label
         label.text = ''
 
         for idx, track in enumerate(top_tracks['items'], start=1):
@@ -90,7 +88,6 @@ class SpokivyApp(App):
             if idx < len(top_tracks['items']):
                 label.text += '\n\n'
 
-        # Alinear el texto a la izquierda
         label.text_size = (label.width, None)
         label.halign = 'left'
         label.padding = [10, 0, 0, 0]
@@ -110,8 +107,6 @@ class SpokivyApp(App):
 
     def show_currently_playing(self, label):
         current_track = sp.current_user_playing_track()
-        
-        # Reiniciar el contenido del label
         label.text = ''
         
         if current_track is not None and 'item' in current_track:
@@ -126,8 +121,6 @@ class SpokivyApp(App):
 
     def show_top_artists(self, label):
         top_artists = sp.current_user_top_artists(limit=10, time_range='short_term')
-        
-        # Reiniciar el contenido del label
         label.text = ''
         
         for idx, artist in enumerate(top_artists['items'], start=1):
@@ -138,9 +131,8 @@ class SpokivyApp(App):
             link_button = Button(text='Link', size_hint=(None, None), size=(70, 30))
             link_button.bind(on_release=lambda btn, uri=artist_uri: self.open_spotify_page(uri))
             
-            # Agregar el fondo verde al botón
             with link_button.canvas.before:
-                Color(0, 0.5, 0, 1)  # Color verde oscuro (R, G, B, A)
+                Color(0, 0.5, 0, 1)
                 Rectangle(pos=link_button.pos, size=link_button.size)
             
             label.text += f"{idx}. {artist_name}"
@@ -155,8 +147,8 @@ class SpokivyApp(App):
         webbrowser.open(uri)
 
     def show_recommendations(self, label):
-        # Aquí puedes agregar la lógica para mostrar las recomendaciones de canciones en el cuadro de respuesta
         label.text = 'Recomendar canciones'
+        # No programado todavia
     
 if __name__ == '__main__':
     # Configuración de autenticación de Spotify
